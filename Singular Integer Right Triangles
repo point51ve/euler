@@ -1,0 +1,33 @@
+lengths = {x:0 for x in range(1,1500001)}
+
+def gcd(x,y):
+    if y>x:
+        return gcd(y,x)
+    elif x%y==0:
+        return y
+    else:
+        return gcd(x-y,y)
+    
+for m in range(1,867):
+    for n in range(1,m):
+        if (n%2 == 1 and m%2 == 1) or gcd(m,n)!=1:
+            continue
+        k=1
+        while(2*k*m*(m+n)<1500000):
+            a=k*(m**2-n**2)
+            b=k*m*n*2
+            c=k*(m**2+n**2)
+            lengths[a+b+c]+=1
+            
+            k+=1
+
+
+result = 0
+for i in lengths.keys():
+    if lengths[i]==1:
+        result+=1
+
+print(result)
+
+
+
